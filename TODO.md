@@ -3,7 +3,7 @@ Desired feature list
 
 ### Desired features
 - [ ] Error handling for main
-    - [ ] Error handling when a word isn't defined
+    - [x] Error handling when a word isn't defined
 - [ ] Terminal-aware color-coding for definition list
 - [ ] Various arguments to control desired output
     - [ ] Part of speech flag: e.g. -v to give verb definitions only

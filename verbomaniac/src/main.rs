@@ -11,12 +11,16 @@ fn main() {
         Some(w) => w,
     };
 
-    let word = verbomaniac_lib::define(&word).unwrap().expect("No result");
-    println!("-- {} --", word.word);
-    for meaning in word.meanings {
-        println!("\t{}", meaning.part_of_speech);
-        for definition in meaning.definitions.iter().take(3) {
-            println!("\t\t- {}", definition.definition);
+    if let Ok(Some(word)) = verbomaniac_lib::define(&word) {
+        println!("-- {} --", word.word);
+        for meaning in word.meanings {
+            println!("\t{}", meaning.part_of_speech);
+            for definition in meaning.definitions.iter().take(3) {
+                println!("\t\t- {}", definition.definition);
+            }
         }
+    } else {
+        eprintln!("Definition not found for \"{}\"", word);
+        exit(2);
     }
 }
