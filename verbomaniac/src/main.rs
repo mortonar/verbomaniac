@@ -1,17 +1,20 @@
-use std::env::args;
+use clap::Parser;
 use std::process::exit;
 use verbomaniac_lib;
 
-fn main() {
-    let word = match args().nth(1) {
-        None => {
-            eprintln!("Please provide a word to define");
-            exit(1);
-        }
-        Some(w) => w,
-    };
+#[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
+/// Define a word
+struct Args {
+    /// word to define
+    word: String,
+}
 
-    if let Ok(Some(word)) = verbomaniac_lib::define(&word) {
+fn main() {
+    let args = Args::parse();
+    let word = &args.word;
+
+    if let Ok(Some(word)) = verbomaniac_lib::define(word) {
         println!("-- {} --", word.word);
         for meaning in word.meanings {
             println!("\t{}", meaning.part_of_speech);
